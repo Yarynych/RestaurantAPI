@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<style>
+    html, body {
+        padding: 0;
+        margin: 10px;
+    }
+
+    .contentButton{
+        line-height: 1.3;
+        width: 100%;
+    }
+
+    .contentButton {
+        text-align: center;
+        padding-bottom: 50px;
+    }
+
+    .gradient-button{
+        width: 50%;
+        align-items: center;
+        text-decoration: none;
+        display: inline-block;
+        padding: 20px 30px;
+        margin: 10px 20px;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background-size: 200% auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+        transition: .5s;
+        color: black;
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    .gradient-button:hover{
+        background-position: right center;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background-size: 200% auto;
+        transition: .5s;
+        color: black;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+
+    .gradient-button{
+        background-image: linear-gradient(to right, #B8B8F3 0%, #FFD3BA 51%, white 100%);
+    }
+</style>
+
+
+
+<header th:insert="bloks/header :: header"></header>
+
+<!--<p th:text="'Привіт. Сторінка: ' + ${title} + '!'" />-->
+
+<div class="container mt-5">
+    <H1>Персонал</H1>
+
+    <div th:each="el : ${worker}" class="alert alert-info mt-2">
+        <h3 th:text="${el.name}"/>
+        <p th:text="${el.firs_name}" />
+        <p th:text="${el.position}" />
+
+        <a th:href="'/personal/edit/'  + ${el.id}" class="btn btn-warning">Редагувати</a>
+        <br><br>
+
+        <form th:action="'/personal/remove/' + ${el.id}" method="post">
+            <button class="btn btn-warning" type="submit">Видалити</button>
+        </form>
+
+    </div>
+</div>
+<br><br>
+
+<div class="contentButton">
+    <div class="forButton"><a href="/personal/add" class="gradient-button">Додати працівника</a></div>
+</div>
+
+<footer th:insert="bloks/footer :: footer"></footer>
+</body>
+</html>
